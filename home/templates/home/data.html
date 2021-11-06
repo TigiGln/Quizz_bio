@@ -1,0 +1,39 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}
+    Tableau images 
+{% endblock %}
+
+{% block body %}
+    <div class="container bg-info">
+            {% static "" as baseUrl %}
+            {% for image in images %}
+                <div class="row  mt-5 mx-auto justify-content-center align-items-center bg-secondary">
+                    <div class="col-sm-6 bg-secondary">
+                        <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img-fluid" alt="Non">
+                    </div>
+                    <div class="col-sm-6 ">
+                        <h5>Microscopy</h5>
+                        <p> {{ image.microscopy }}</p>
+                        <h5>Description</h5>
+                        <p>{{ image.description }}</p>
+                        <h5>Cell Type</h5>
+                        <p>{{ image.cell_type }}</p>
+                        {% if image.component != "None" %}
+                            <h5>Component</h5>
+                            <p>{{ image.component }}</p>
+                        {% endif %}
+                        <h5>Organism</h5>
+                        <p>{{ image.organism }}</p>
+                        <h5>Doi</h5>
+                        <p>{{ image.doi}}</p>
+                    </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="clearfix"></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+    </div>
+{% endblock %}
+<!-- <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img-thumbnail border-primary rounded float-start" alt="Non">-->

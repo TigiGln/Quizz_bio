@@ -1,0 +1,43 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block style%}
+    <!-- Insérer cette balise "link" après celle de Bootstrap -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+{% endblock %}
+{% block title %}
+    Tableau de score 
+{% endblock %}
+
+{% block body %}
+    <section class="container bg-info">
+        <div class="row">
+            <div class="col">
+                <table class="table" data-toggle="table" data-search="true" data-show-columns="true">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-sortable="true" data-field="name">Name</th>
+                            <th scope="col" data-sortable="true" data-field="score">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for score in score_user %}
+                            <tr>
+                                <td>{{ score.user }}</td>
+                                <td>{{ score.score }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block script %}
+    <!-- Insérer cette balise "script" après celle de Bootstrap --> 
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <!--Passage au format français du table sort-->
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
+{% endblock %}

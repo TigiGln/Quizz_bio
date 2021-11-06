@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}
+    Login 
+{% endblock %}
+
+{% block body %}
+    <div class="container bg-info">
+        {% if form.errors %}
+            <p> Ton nom ou ton mot de passe n'est pas valide. Essaie encore</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p> Ton compte n'a pas accés à cette page. crée un compte qui permet d'y accéder</p>
+            {% else %}
+                <p> Merci de te connecter pour voir cette page</p>
+            {% endif %}
+        {% endif %}
+        <form method="post" >
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input type="submit" value="login"/>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+        {# Récupères ton mot de passe in ton URL #}
+        <p><a href="/">Mot de passe oublié</a></p>
+    
+    </div>
+{% endblock %}
