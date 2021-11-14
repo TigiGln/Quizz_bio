@@ -20,8 +20,10 @@ from . import views
 app_name = 'quizz'
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path("login/", LoginView.as_view(), name='login'),
+    path("logout/", LogoutView.as_view(), name='logout'),
     path("registration/", views.register, name="register"),
+    path("", views.choice_quizz, name="choice_quizz"),
+    path("quizz/", views.quizz, name="quizz"),
     
 ]

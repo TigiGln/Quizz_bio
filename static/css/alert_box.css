@@ -1,0 +1,30 @@
+.custom_box
+{
+    border: 2px solid grey;
+    padding: 10px;
+    width: fit-content;
+    background-color: cyan;
+    margin: auto;
+}
+
+#modal
+{
+    position:absolute;
+    width: 45%;
+    height: 45%;
+}
+p
+{
+    color: black;
+    font-weight: bold;
+
+}
+h3
+{
+    color: red;
+    font-weight: bold;
+}
+.See
+{
+    text-align: center;
+}

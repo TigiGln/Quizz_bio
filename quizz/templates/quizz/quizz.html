@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}
+    Quizz Component
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/redefine.css' %}" />
+{% endblock %}
+    
+{% block body %}
+    {% static "" as baseUrl %}
+    
+    <div class="container bg-light">
+        <p>{{ error }}</p>
+        <div class="container_row row d-flex justify-content-space-between">
+            {% for image in images %}
+                <div class="col m-2">
+                    <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img_container img-fluid img-thumbnail w-100 h-100" alt="{{ image.image_name }}"> 
+                </div>
+            {% endfor %}
+        </div>
+        <form method="POST">
+        {% csrf_token %}
+            <div class="row m-5">
+                <p class="text-dark text-center display-5" style="font-weight: bold;">{{ question.question }}</p>
+            </div>
+            {% for answer in answers %}
+                <div class="row d-flex m-2 p-3">
+                        <div class="col text-center">
+                            <input type="radio" id="{{ answer.answer }}" name="answer" value="{{ answer.answer }}" class="answer_quiz" onchange="check(this)" required>
+                            <label for="{{ answer.answer }}" id="id_{{ answer.answer }}" style="color:black; font-size: 2em; font-weight: bold;" data-toggle="tooltip" data-trigger="hover focus" data-placement="auto" title="{{ answer.definition }}">{{ answer.answer }}</label>
+                        </div>
+                </div>
+            {% endfor %}
+            <div class="row m-3 d-flex">
+                <div class="col-1  justify-centent-center">
+                    <input class="btn-lg btn-outline-dark rounded-fill shadow mx-2" style="font-size: 1em; padding: 10px;" type="submit" value="Next">
+                </div>
+            </div>
+            <input class="visually-hidden" type="hidden" value="{{ random }}" name="answer_preview" id="answerCorrect">
+            <input type="hidden" value="{{ question_points }}" name="question_points">
+        </form>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/feedback.js' %}"></script>
+    
+{% endblock %}

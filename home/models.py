@@ -11,10 +11,7 @@ class Images(models.Model):
     doi = models.CharField(max_length=450)
     organism = models.CharField(max_length=500)
 
-"""class User(models.Model):
-    user_id = models.IntegerField(primary_key=True)
-    password = models.CharField(max_length=50)
-    username = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
-"""
+    def __str__(self):
+        return self.image_name
+
 

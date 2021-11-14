@@ -9,16 +9,17 @@ class ParagraphErrorList(ErrorList):
 
     def as_divs(self):
         if not self: return ''
-        return '<div class="errorlist">%s</div>' % ''.join(['<p class="smallerror">%s</p>' % e for e in self])
+        return '<div class="errorlist">%s</div>' % ''.join(['<p class="smallerror">%s</p>' % error for error in self])
+
 
 class UserForm(ModelForm):
     class Meta:
         model= User
         fields = ["username", "email", "password"]
-        widget = {
-            'username': TextInput(attrs={'class': 'form-control'}),
-            'email': EmailInput(attrs={'class': 'form-control'}),
-            'password': PasswordInput(attrs={'class': 'form-control'})
+        widgets = {
+            'username': TextInput(attrs={'class': 'form-control w-25', 'style':'font-size:20px;'}),
+            'email': EmailInput(attrs={'class': 'form-control w-25', 'style':'font-size:20px;'}),
+            'password': PasswordInput(attrs={'class': 'form-control w-25', 'style':'font-size:20px;'})
         }
 
 

@@ -5,6 +5,8 @@
     <!-- Insérer cette balise "link" après celle de Bootstrap -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 {% endblock %}
+{% block scripts %}
+{% endblock %}
 {% block title %}
     Tableau de score 
 {% endblock %}
@@ -13,8 +15,8 @@
     <section class="container bg-info">
         <div class="row">
             <div class="col">
-                <table class="table" data-toggle="table" data-search="true" data-show-columns="true">
-                    <thead>
+                <table class="table ui-widget" id="table" data-toggle="table" data-search="true" aria-autocomplete="inline" style="font-size:large;">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col" data-sortable="true" data-field="name">Name</th>
                             <th scope="col" data-sortable="true" data-field="score">Score</th>

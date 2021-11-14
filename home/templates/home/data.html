@@ -4,36 +4,55 @@
 {% block title %}
     Tableau images 
 {% endblock %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/alert_box.css' %}" />
+{% endblock %}
 
 {% block body %}
-    <div class="container bg-info">
+    <div class="container">
+        <div class="row d-flex justify-content-space-between bg-info" id="block_images">
             {% static "" as baseUrl %}
             {% for image in images %}
-                <div class="row  mt-5 mx-auto justify-content-center align-items-center bg-secondary">
-                    <div class="col-sm-6 bg-secondary">
-                        <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img-fluid" alt="Non">
-                    </div>
-                    <div class="col-sm-6 ">
-                        <h5>Microscopy</h5>
-                        <p> {{ image.microscopy }}</p>
-                        <h5>Description</h5>
-                        <p>{{ image.description }}</p>
-                        <h5>Cell Type</h5>
-                        <p>{{ image.cell_type }}</p>
-                        {% if image.component != "None" %}
-                            <h5>Component</h5>
-                            <p>{{ image.component }}</p>
+                    <div class="col-sm-4 d-inline-flex flex-column justify-content-center my-2" id={{image.image_id}}>
+                        <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img_container img-fluid img-thumbnail w-100 h-100" alt="Non">
+                        {% if image.organism != "None" %}
+                            <span class="my-5 display-6 ">{{ image.organism }}</span>
+                        {% else %}
+                            <span class="my-5 display-6"> Component: {{ image.component }}</span>
                         {% endif %}
-                        <h5>Organism</h5>
-                        <p>{{ image.organism }}</p>
-                        <h5>Doi</h5>
-                        <p>{{ image.doi}}</p>
+                        <button type="button" class="btn btn-lg btn-outline-dark w-25 See" id="custom_box_{{ image.image_id }}" onclick="display_box(this)">See more</button>
                     </div>
-                    {% if forloop.counter|divisibleby:2 %}
-                        <div class="clearfix"></div>
-                    {% endif %}
-                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    <div class="clearfix"></div>
+                {% endif %}
             {% endfor %}
+            {% if paginate %}
+                <div class="clearfix"></div>
+                <nav aria-label="">
+                    <ul class="pager">
+                        {% if images.has_previous %}
+                            <li><a href="?page={{ images.previous_page_number }}" style="font-size:large;">Previous</a></li>
+                        {% endif %}
+                        {% for page in page_paginate%}
+                            {% if images.has_previous %}
+                                <li><a href="?page={{ page }}">{{ page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if images.has_next %}
+                            <li><a href="?page={{ images.next_page_number }}" style="font-size:large;">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
-<!-- <img src="{{ baseUrl }}/media/{{ image.image_name }}.jpg" class="img-thumbnail border-primary rounded float-start" alt="Non">-->
+
+{% block script %}
+    <script type="text/javascript">
+        var json_data = unescape("{{my_data | safe | escapejs}}");
+        var baseUrl = "{{ baseUrl }}";
+    </script>
+    <script src="{% static 'js/alert_box.js' %}"></script>
+    
+{% endblock %}

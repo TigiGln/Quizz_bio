@@ -1,0 +1,21 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}
+    Choisir Quizz
+{% endblock %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/alert_box.css' %}" />
+{% endblock %}
+
+{% block body %}
+    <div class="container bg-info" style="min-height: 50px;">
+        <div class="row justify-content-around align-items-center"  style="min-height: 50px;">
+            {% for category in list_category %}
+            <div class="col-3 text-center ">
+                <button type="button" class="btn btn-lg btn-outline-dark" style="min-height: 40px; font-size: 2em;" onclick=window.location.href="{% url 'quizz:quizz' %}?choice_quizz={{ category }}">{{ category }}</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
