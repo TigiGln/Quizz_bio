@@ -6,10 +6,20 @@ from home.models import Images
 from .forms import UserForm, ParagraphErrorList
 from django.db import transaction, IntegrityError
 import random
-import json
+
 
 # Create your views here.
 def retrieve_score(request):
+    """
+    recovery of the user's score for all pages of the site after login
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        score: int
+            user's score
+    """
     score=""
     if request.user.is_authenticated:
         score = Profile.objects.get(user=request.user)
@@ -17,6 +27,16 @@ def retrieve_score(request):
     
 
 def register(request):
+    """
+    function to manage the user registration interface and to create a score profile for each user in the database
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        returns to the home page if the user is correctly registered. 
+        If not, it stays on the registration page and displays the errors 
+    """
     context = {}
     if request.method == 'POST':
         form = UserForm(request.POST, error_class=ParagraphErrorList)
@@ -26,6 +46,7 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             try:
+                #transactions allow you to cancel all the queries executed if there is an error before the end
                 with transaction.atomic():
                     user = User.objects.filter(email=email)
                     if not user.exists():
@@ -50,6 +71,15 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 def choice_quizz(request):
+    """
+    function to manage the different possible quizzes
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        return the block allowing to choose the quiz 
+    """
     score = retrieve_score(request)
     questions = Question.objects.all()
     list_category = []
@@ -60,6 +90,22 @@ def choice_quizz(request):
     return render(request, "quizz/choice_quizz.html", data)
 
 def score_change(request, response, answer, question_points):
+    """
+    function to update the user's score according to their answers to the quiz
+
+    :parameter:
+        request: object request Http
+        response: str
+            response given by the user
+        answer: str
+            correct answer to the question
+        question_points: int
+            the number of points for the question
+
+    :return:
+        None
+        Updating the Profile Table with the new score 
+    """
     score_user = Profile.objects.get(user=request.user).score
     if str(response) == str(answer):
         new_score = score_user + int(question_points)
@@ -72,6 +118,15 @@ def score_change(request, response, answer, question_points):
 
 
 def quizz(request):
+    """
+    Function to generate the quiz chosen by the user 
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        The template according to the chosen quiz 
+    """
     mode = request.GET.get('choice_quizz')
     context = {}
     if(request.method == "POST"):

@@ -7,11 +7,29 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 # Create your views here.
 def index(request):
+    """
+    recovery of the score data of the connected user and creation of the site's home page
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        the template chosen for the url
+    """
     score = retrieve_score(request)
     context = {"score": score}
     return render(request, 'home/index.html', context)
 
 def data(request):
+    """
+    managing the exploration of image data in the database
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        the template chosen for the url
+    """
     score = retrieve_score(request)
     images_list = Images.objects.all().values()
     list_images = []
@@ -35,6 +53,15 @@ def data(request):
     return render(request, 'home/data.html', data)
 
 def score(request):
+    """
+    management of the scoreboard for the users of the application
+
+    :parameter:
+        request: object request Http
+
+    :return:
+        the template chosen for the url
+    """
     score_user = retrieve_score(request)
     score = Profile.objects.all()
     data = {"score_user" : score, "score": score_user}

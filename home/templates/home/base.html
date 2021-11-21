@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-2 h-25">
                             <img src="{{ baseUrl }}/img/score2.png" class="img-fluid w-25 h-25" alt="Score :">
-                            <span class="text-white display-5 mx-3" style="font-weight: bold;">{{ score.score }} points</span>
+                            <span class="text-white display-5 mx-3" id="score" style="font-weight: bold;">{{ score.score }} points</span>
                     </div>
                     <div class="col-1 h-50">
                         <input type="image" id="image_logout" alt="Login" src="{{ baseUrl }}/img/logout.png" class="img-fluid  w-50 h-50" onclick=window.location.href="{% url 'quizz:logout' %}?next=/">
