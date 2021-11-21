@@ -9,8 +9,27 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row d-flex justify-content-space-between bg-info" id="block_images">
+    <div class="container bg-info">
+        <h1 class = "m-2">Explore</h1>
+        <button class="btn btn-lg btn-outline-dark" type="button" onclick="show_search()">
+            Search Form
+        </button>
+            <div class="row m-2 mb-4" id="collapseForm" style="display:none;">
+                <form method="POST" >
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>Please select a search field</legend>
+                        {% for field in list_field %}
+                            <input type="radio" id="{{ field }}" name="field" value="{{ field }}" required>
+                            <label for="{{ field }}" style="color:black; font-size: 2em;">{{ field }}</label>
+                        {% endfor %}
+                    </fieldset>
+                    <input type="search" id="data_search" name="search" aria-label="Search" class="col-9 input-lg" placeholder="Search" required>
+                    <button class="btn btn-lg btn-outline-dark col-2">Search</button>
+                </form>
+                <p>{{ errors }}</p>
+            </div>
+        <div class="row d-flex justify-content-space-between" id="block_images">
             {% static "" as baseUrl %}
             {% for image in images %}
                     <div class="col-sm-4 d-inline-flex flex-column justify-content-center my-2" id={{image.image_id}}>
@@ -53,6 +72,6 @@
         var json_data = unescape("{{my_data | safe | escapejs}}");
         var baseUrl = "{{ baseUrl }}";
     </script>
-    <script src="{% static 'js/alert_box.js' %}"></script>
+    <script src="{% static 'js/gestion_explore.js' %}"></script>
     
 {% endblock %}

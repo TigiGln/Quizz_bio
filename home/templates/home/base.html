@@ -47,8 +47,8 @@
                     <div class="col-1">
                         <input type="image" id="image_login" alt="Login" src="{{ baseUrl }}/img/login.png" class="img-fluid " onclick=window.location.href="{% url 'quizz:login' %}?next={{ resquest.path }}">
                     </div>
-                    <div class="col-1">
-                        <input type="image" id="image_register" alt="Register" src="{{ baseUrl }}/img/register.jpg" class="img-fluid " onclick=window.location.href="{% url 'quizz:register' %}">
+                    <div class="col-2">
+                        <input type="image" id="image_register" alt="Register" src="{{ baseUrl }}/img/register.png" class="img-fluid w-75 h-75" onclick=window.location.href="{% url 'quizz:register' %}">
                         <!-- <button type="button" class="btn btn-lg btn-outline-success register" onclick=window.location.href="{% url 'quizz:register' %}">Register</button> -->
                     </div>
                 {% endif %}

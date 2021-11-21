@@ -134,8 +134,6 @@ def quizz(request):
         answer = request.POST.get('answer_preview')
         question_points = request.POST.get('question_points')
         score_change(request, response, answer, question_points)
-        info= "score modifié"
-        context["info"] = info
     if mode == "microscopy" or mode == "component" or mode == "mixed":
         if mode == "mixed":
             index = random.randint(1, 2)

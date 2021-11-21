@@ -12,8 +12,9 @@
         {% endif %}
         <form method="post">
             {% csrf_token %}
+            <h1 class="my-3">Login</h1>
             <table>
-                <tr style="font-size:large;">
+                <tr class="mb-3" style="font-size:large;">
                     <td>{{ form.username.label_tag }}</td>
                     <td>{{ form.username }}</td>
                 </tr>
