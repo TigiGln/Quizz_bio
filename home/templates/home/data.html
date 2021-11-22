@@ -27,8 +27,8 @@
                     <input type="search" id="data_search" name="search" aria-label="Search" class="col-9 input-lg" placeholder="Search" required>
                     <button class="btn btn-lg btn-outline-dark col-2">Search</button>
                 </form>
-                <p>{{ errors }}</p>
             </div>
+            <p class="alert-danger m-2" style="font-size: 2em;">{{ errors }}</p>
         <div class="row d-flex justify-content-space-between" id="block_images">
             {% static "" as baseUrl %}
             {% for image in images %}

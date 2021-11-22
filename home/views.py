@@ -49,15 +49,12 @@ def data(request):
         request_search = request.POST.get('search')
         fields = request.POST.get("field")
         error=""
-        if fields != "":
-            images_list = search(request_search, fields)
-            if images_list == {}:
-                error = "There are no results for your search"
-            else:
-                for elem in range(0, len(images_list)):
-                    list_images.append(images_list[elem])
+        images_list = search(request_search, fields)
+        if not images_list.exists():
+            error = "There are no results for your search"
         else:
-            error = "You have not checked a radio button"
+            for elem in range(0, len(images_list)):
+                list_images.append(images_list[elem])
         images_json = json.dumps(list_images, cls=DjangoJSONEncoder)
         data = {"images":images_list, "score": score, "my_data": images_json, "list_field": list_field, "errors": error}
     else:
