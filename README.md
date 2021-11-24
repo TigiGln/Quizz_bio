@@ -1,5 +1,5 @@
 ![Python 3.8.5](https://img.shields.io/badge/Python-3.8.5-blue.svg)
-![PyPI - Django Version](https://img.shields.io/badge/django-3.7.2)
+![PyPI - Django Version](https://img.shields.io/badge/django-3.7.2-orange.svg)
 
 # M2 DLAD Django Project
 
