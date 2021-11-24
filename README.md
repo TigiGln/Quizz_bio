@@ -1,5 +1,5 @@
 ![Python 3.8.5](https://img.shields.io/badge/Python-3.8.5-blue.svg)
-![PyPI - Django Version](https://img.shields.io/pypi/djversions/3.7.2)
+![PyPI - Django Version](https://img.shields.io/badge/django-3.7.2)
 
 # M2 DLAD Django Project
 
@@ -50,6 +50,15 @@ python manage.py startapp <nameapp>
 ```{}
 python manage.py runserver
 ```
+
+To populate the databases, one can find overloads of manage.py:
+```{}
+python manage.py add_images tables_images.csv
+python manage.py add_bdd table_answers.csv
+python manage.py add_bdd table_question.csv
+```
+
+
 
 ## Launch project
 
